@@ -5,7 +5,7 @@ import json
 
 def preprocess_image(image):
     """
-    Detect white / light colored plot regions using HSV mask
+    Detecting white / light colored plot regions using HSV mask
     """
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
@@ -48,7 +48,7 @@ def detect_plots(binary_img, original_img):
 
         x, y, bw, bh = cv2.boundingRect(cnt)
 
-        # Remove contours touching image boundary
+        # Removing contours touching image boundary
         if x <= 2 or y <= 2 or x + bw >= w - 2 or y + bh >= h - 2:
             continue
 
@@ -90,7 +90,7 @@ def detect_plots(binary_img, original_img):
         plots.append(plot_info)
         plot_id += 1
 
-        # Draw green contour
+        # Drawing green contour
         cv2.drawContours(original_img, [approx], -1, (0, 255, 0), 3)
 
     return original_img, plots
